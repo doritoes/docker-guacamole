@@ -1,4 +1,4 @@
-**:warning: This project is now a fork of oznu/guacamose, which is archived and no longer supported. My test envirionments do not include LDAP or other authentication services at this time.**
+**:warning: This project is a fork of oznu/guacamole, which is archived and no longer supported. My test envirionments do not include LDAP or other authentication services at this time.**
 
 # Docker Guacamole
 
