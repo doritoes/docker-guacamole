@@ -1,4 +1,4 @@
-**:warning: This project is now archived and no longer supported. Please contact me if you maintain a replacement and would like me to link to your repo.**
+**:warning: This project is now a fork of oznu/guacamose, which is archived and no longer supported.**
 
 # Docker Guacamole
 
@@ -76,7 +76,7 @@ Mapped volumes behave differently when running Docker for Windows and you may en
 version: "2"
 services:
   guacamole:
-    image: oznu/guacamole
+    image: doritoes/guacamole
     container_name: guacamole
     volumes:
       - postgres:/config
@@ -89,7 +89,7 @@ volumes:
 
 ## License
 
-Copyright (C) 2017-2020 oznu
+Copyright (C) 2021 doritoes
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
