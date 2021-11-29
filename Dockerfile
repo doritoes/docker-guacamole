@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y \
     libssh2-1-dev libtelnet-dev libvncserver-dev \
     libpulse-dev libssl-dev libvorbis-dev libwebp-dev libwebsockets-dev \
     ghostscript postgresql-${PG_MAJOR} \
+    build-essential
   && rm -rf /var/lib/apt/lists/*
 
 # Link FreeRDP to where guac expects it to be
@@ -59,14 +60,19 @@ RUN set -x \
 # Add optional extensions
 RUN set -xe \
   && mkdir ${GUACAMOLE_HOME}/extensions-available \
-  && for i in auth-ldap auth-duo auth-header auth-cas auth-openid auth-quickconnect auth-totp; do \
+  && for i in auth-gitlabldap auth-duo auth-header auth-cas auth-openid auth-quickconnect auth-totp; do \
     echo "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/binary/guacamole-${i}-${GUAC_VER}.tar.gz" \
     && curl -SLO "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/binary/guacamole-${i}-${GUAC_VER}.tar.gz" \
     && tar -xzf guacamole-${i}-${GUAC_VER}.tar.gz \
     && cp guacamole-${i}-${GUAC_VER}/guacamole-${i}-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions-available/ \
     && rm -rf guacamole-${i}-${GUAC_VER} guacamole-${i}-${GUAC_VER}.tar.gz \
   ;done
+  
+# Cleanup
+RUN apt-get remove --purge -y build-essential
+RUN apt-get autoremove -y && apt-get clean && apt-get autoclean
 
+# Finish
 ENV PATH=/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH
 ENV GUACAMOLE_HOME=/config/guacamole
 
