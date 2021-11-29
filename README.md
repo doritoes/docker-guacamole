@@ -16,7 +16,7 @@ This container runs the guacamole web client, the guacd server and a postgres da
 docker run \
   -p 8080:8080 \
   -v </path/to/config>:/config \
-  oznu/guacamole
+  doritoes/guacamole
 ```
 
 ## Raspberry Pi / ARMv6
@@ -27,7 +27,7 @@ This image will also allow you to run [Apache Guacamole](https://guacamole.apach
 docker run \
   -p 8080:8080 \
   -v </path/to/config>:/config \
-  oznu/guacamole:armhf
+  doritoes/guacamole:armhf
 ```
 
 ## Parameters
