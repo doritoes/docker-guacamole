@@ -20,7 +20,7 @@ RUN curl -SLO "https://github.com/just-containers/s6-overlay/releases/download/v
 WORKDIR ${GUACAMOLE_HOME}
 
 # Install dependencies
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9
 RUN apt-get update && apt-get install -y \
     libcairo2-dev libjpeg62-turbo-dev libpng-dev \
     libossp-uuid-dev libavcodec-dev libavutil-dev \
