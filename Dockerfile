@@ -9,7 +9,6 @@ ENV ARCH=amd64 \
   POSTGRES_DB=guacamole_db
 
 # Apply the s6-overlay
-
 RUN curl -SLO "https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.3/s6-overlay-${ARCH}.tar.gz" \
   && tar -xzf s6-overlay-${ARCH}.tar.gz -C / \
   && tar -xzf s6-overlay-${ARCH}.tar.gz -C /usr ./bin \
@@ -77,9 +76,6 @@ ENV PATH=/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH
 ENV GUACAMOLE_HOME=/config/guacamole
 
 WORKDIR /config
-
 COPY root /
-
 EXPOSE 8080
-
 ENTRYPOINT [ "/init" ]
