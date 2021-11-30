@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y \
     libssh2-1-dev libtelnet-dev libvncserver-dev \
     libpulse-dev libssl-dev libvorbis-dev libwebp-dev libwebsockets-dev \
     ghostscript postgresql-${PG_MAJOR} \
+    software-properties-common \
     build-essential
 
 # Link FreeRDP to where guac expects it to be
