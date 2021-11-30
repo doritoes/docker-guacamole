@@ -20,7 +20,6 @@ RUN curl -SLO "https://github.com/just-containers/s6-overlay/releases/download/v
 WORKDIR ${GUACAMOLE_HOME}
 
 # Install dependencies
-RUN add-apt-repository deb http://deb.debian.org/debian bullseye-backports main contrib non-free
 RUN apt-get update && apt-get install -y \
     libcairo2-dev libjpeg62-turbo-dev libpng-dev \
     libossp-uuid-dev libavcodec-dev libavutil-dev \
@@ -30,6 +29,7 @@ RUN apt-get update && apt-get install -y \
     ghostscript postgresql-${PG_MAJOR} \
     software-properties-common \
     build-essential
+RUN add-apt-repository deb http://deb.debian.org/debian bullseye-backports main contrib non-free
 
 # Link FreeRDP to where guac expects it to be
 RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp /usr/lib/arm-linux-gnueabihf/freerdp || exit 0
