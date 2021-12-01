@@ -1,0 +1,13 @@
+# Release Notes
+
+Forked archived repository in a non-buildable state and 
+
+## Phase 1 - Working Builds
+
+Got working builds for x64 and ARM and did basic testing. Updated to latest s6. On x64 builds update to postgresql 13.
+
+Used crude and rudimentary workarounds where required.
+
+## Phase 2 - Branch and DEV builds
+
+Improve using series of update branches. Commit test builds as doritoes/guacamole:dev.
