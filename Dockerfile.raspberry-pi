@@ -35,7 +35,7 @@ RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp //usr/include/freerdp2
 RUN [ "$ARCH" = "amd64" ] && ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
 
 # Install guacamole-server
-# the -k for insecure is temporary as the build breaks on expired certi
+# the -k for insecure is temporary as the build breaks on expired certificate
 RUN curl -SLOk "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/source/guacamole-server-${GUAC_VER}.tar.gz" \
   && tar -xzf guacamole-server-${GUAC_VER}.tar.gz \
   && cd guacamole-server-${GUAC_VER} \
