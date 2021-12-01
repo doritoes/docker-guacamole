@@ -21,7 +21,6 @@ WORKDIR ${GUACAMOLE_HOME}
 
 # Install dependencies
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9
-RUN echo deb https://apt.postgresql.org/pub/repos/apt buster-pgdg main >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y \
     libcairo2-dev libjpeg62-turbo-dev libpng-dev \
     libossp-uuid-dev libavcodec-dev libavutil-dev \
