@@ -28,7 +28,8 @@ RUN apt-get update && apt-get install -y \
     libssh2-1-dev libtelnet-dev libvncserver-dev \
     libpulse-dev libssl-dev libvorbis-dev libwebp-dev libwebsockets-dev \
     ghostscript postgresql-${PG_MAJOR} \
-    build-essential
+    build-essential \
+  && rm -rf /var/lib/apt/lists/*
 
 # Link FreeRDP to where guac expects it to be
 RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp /usr/lib/arm-linux-gnueabihf/freerdp || exit 0
@@ -69,8 +70,7 @@ RUN set -xe \
 
 # Cleanup
 RUN apt-get remove --purge -y build-essential
-RUN apt-get autoremove -y && apt-get clean && apt-get autoclean \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt-get autoremove -y && apt-get clean && apt-get autoclean
 
 # Wrap up
 ENV PATH=/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH
