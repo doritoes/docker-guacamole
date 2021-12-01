@@ -20,6 +20,7 @@ RUN curl -SLO "https://github.com/just-containers/s6-overlay/releases/download/v
 WORKDIR ${GUACAMOLE_HOME}
 
 # Install dependencies
+# installing missing public key to stop the build from breaking
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9
 RUN apt-get update && apt-get install -y \
     libcairo2-dev libjpeg62-turbo-dev libpng-dev \
@@ -31,7 +32,7 @@ RUN apt-get update && apt-get install -y \
     build-essential
 
 # Link FreeRDP to where guac expects it to be
-RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp //usr/include/freerdp2/freerdp || exit 0
+RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp /usr/include/freerdp2/freerdp || exit 0
 RUN [ "$ARCH" = "amd64" ] && ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
 
 # Install guacamole-server
