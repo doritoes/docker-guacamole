@@ -29,3 +29,11 @@ With right hostname,port(3389),username and password
 Optionally set resultion to 800 x 600
 
 Black screen paints, but disconnects
+
+Testing
+
+Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp
+
+change REG_DWORD SecurityLayer from 2 to 1
+
+also try 0
