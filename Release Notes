@@ -37,3 +37,23 @@ Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\Win
 change REG_DWORD SecurityLayer from 2 to 1
 
 also try 0
+
+also try installing freerpd from source
+
+sudo apt-get update -y
+
+sudo apt-get install git cmake cdbs zlib1g-dev libssl-dev libglib2.0-dev libxml2-dev libxext-dev libsystemd-dev libwayland-dev libxkbcommon-dev libasound2-dev libpulse-dev libcups2-dev libpcsclite-dev libavcodec-dev libavutil-dev libavresample-dev libswresample-dev libxkbfile-dev libxinerama-dev libxcursor-dev libxv-dev libxi-dev libxrandr-dev docbook-xsl libcairo2-dev xsltproc libusb-1.0-0-dev -y
+
+sudo git clone git://github.com/FreeRDP/FreeRDP.git --branch 2.2.0
+
+cd FreeRDP
+
+sudo cmake -DTARGET_ARCH=ARM -DWITH_X11=ON
+
+sudo make
+
+sudo make install
+
+It installs to /usr/local/bin/xfreerdp, so it will probably overwrite 2.0.0 if you already have it installed.
+
+If you leave out "--branch 2.2.0", you'll get 3.0.0-dev as of this post.
