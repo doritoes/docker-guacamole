@@ -27,12 +27,11 @@ RUN apt-get update && apt-get install -y \
     libssh2-1-dev libtelnet-dev libvncserver-dev \
     libpulse-dev libssl-dev libvorbis-dev libwebp-dev libwebsockets-dev \
     ghostscript postgresql-${PG_MAJOR} \
-    build-essential \
-  && rm -rf /var/lib/apt/lists/*
+    build-essential
 
 # Link FreeRDP to where guac expects it to be
 RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp /usr/lib/arm-linux-gnueabihf/freerdp || exit 0
-RUN [ "$ARCH" = "amd64" ] && ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
+RUN [ "$ARCH" = "amd64" ] && ln -s /usr/local/lib/freerdp /usr/include/freerdp2/freerdp || exit 0
 
 # Install guacamole-server
 RUN curl -SLO "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/source/guacamole-server-${GUAC_VER}.tar.gz" \
@@ -69,7 +68,8 @@ RUN set -xe \
 
 # Cleanup
 RUN apt-get remove --purge -y build-essential
-RUN apt-get autoremove -y && apt-get clean && apt-get autoclean
+RUN apt-get autoremove -y && apt-get clean && apt-get autoclean \
+  && rm -rf /var/lib/apt/lists/*
 
 # Wrap up
 ENV PATH=/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH
