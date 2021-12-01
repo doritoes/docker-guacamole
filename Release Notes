@@ -59,3 +59,12 @@ It installs to /usr/local/bin/xfreerdp, so it will probably overwrite 2.0.0 if y
 If you leave out "--branch 2.2.0", you'll get 3.0.0-dev as of this post.
 
 2.4.1 is the maintenance release with security fix
+
+Also concnered about:
+RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp /usr/include/freerdp2/freerdp || exit 0
+RUN [ "$ARCH" = "amd64" ] && ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
+vs
+RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp /usr/lib/arm-linux-gnueabihf/freerdp || exit 0
+RUN [ "$ARCH" = "amd64" ] && ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
+
+arm-linux-gnueabihf does not exist, but arm-linux-gnueabi does.
