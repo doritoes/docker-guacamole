@@ -1,5 +1,3 @@
-**:warning: This project is a fork of oznu/docker-guacamole, which is archived and no longer supported. My test environments do not include LDAP or other authentication services at this time.**
-
 # Docker Guacamole
 
 A Docker Container for [Apache Guacamole](https://guacamole.apache.org/), a client-less remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH over HTML5.
@@ -11,10 +9,13 @@ This image will run on most platforms that support Docker including Docker for M
 This container runs the guacamole web client, the guacd server and a postgres database.
 
 ## Status
-* The main build now passes and initial testing looks good; postgressql 13
-* The ARM build is in a "hack-me-up" state to get it passing; it barely runs on a Raspberry Pi 3 system after a very long spin-up time; still postgresql 9.6
+
+**:warning: This project is a fork of oznu/docker-guacamole, which is archived and no longer supported**
+* The main build now passes and initial testing looks good; postgressql 13; tested Windows 10 and Ubuntu 20.04
+* The ARM build is in a "hack-me-up" state to get it passing; ; postgresql 9.6; it is very slow to star for the first time a Raspberry Pi 3 on Raspberry Pi OS
 * VNC and ssh have been tested (only)
 * Built-in authentication have been tested (only)
+* My test environments do not include LDAP or other authentication services at this time
 
 ## Usage
 
@@ -95,7 +96,7 @@ volumes:
 
 ## License
 
-Copyright (C) 2021 doritoes
+Copyright (C) 2017-2020 oznu, (C) 2021 doritoes derivative work
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
