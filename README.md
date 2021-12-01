@@ -10,6 +10,12 @@ This image will run on most platforms that support Docker including Docker for M
 
 This container runs the guacamole web client, the guacd server and a postgres database.
 
+## Status
+* The main build now passes and initial testing looks good; postgressql 13
+* The ARM build is in a "hack-me-up" state to get it passing; it barely runs on a Raspberry Pi 3 system after a very long spin-up time; still postgresql 9.6
+* VNC and ssh have been tested (only)
+* Built-in authentication have been tested (only)
+
 ## Usage
 
 ```shell
