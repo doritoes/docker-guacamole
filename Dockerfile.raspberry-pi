@@ -3,7 +3,7 @@ FROM arm32v5/tomcat:9-jre11
 ENV ARCH=armhf \
   GUAC_VER=1.3.0 \
   GUACAMOLE_HOME=/app/guacamole \
-  PG_MAJOR=13 \
+  PG_MAJOR=9.6 \
   PGDATA=/config/postgres \
   POSTGRES_USER=guacamole \
   POSTGRES_DB=guacamole_db
@@ -27,15 +27,16 @@ RUN apt-get update && apt-get install -y \
     libswscale-dev freerdp2-dev libfreerdp-client2-2 libpango1.0-dev \
     libssh2-1-dev libtelnet-dev libvncserver-dev \
     libpulse-dev libssl-dev libvorbis-dev libwebp-dev libwebsockets-dev \
-    ghostscript postgresql \
+    ghostscript postgresql-${PG_MAJOR} \
     build-essential
 
 # Link FreeRDP to where guac expects it to be
-RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp /usr/lib/arm-linux-gnueabihf/freerdp || exit 0
+RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp //usr/include/freerdp2/freerdp || exit 0
 RUN [ "$ARCH" = "amd64" ] && ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
 
 # Install guacamole-server
-RUN curl -SLO "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/source/guacamole-server-${GUAC_VER}.tar.gz" \
+# the -k for insecure is temporary as the build breaks on expired certi
+RUN curl -SLOk "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/source/guacamole-server-${GUAC_VER}.tar.gz" \
   && tar -xzf guacamole-server-${GUAC_VER}.tar.gz \
   && cd guacamole-server-${GUAC_VER} \
   && ./configure --enable-allow-freerdp-snapshots \
