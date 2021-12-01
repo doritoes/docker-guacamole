@@ -27,3 +27,5 @@ PARAMETERS:Authentication:Ignore server certificate:Checked
 With right hostname,port(3389),username and password
 
 Optionally set resultion to 800 x 600
+
+Black screen paints, but disconnects
