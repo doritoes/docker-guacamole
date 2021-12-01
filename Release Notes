@@ -12,4 +12,18 @@ Used crude and rudimentary workarounds where required.
 
 Improve using series of update branches. Commit test builds as doritoes/guacamole:dev.
 
-Noted initial run of the container on Raspberry Pi 3 takes a very long time as only one thread is used by Java. Extremely slow in VNC and SSH testing. RDP connection not working possibly due to being so slow, however also fails to connect at 640x480 resolution
+Noted initial run of the container on Raspberry Pi 3 takes a very long time as only one thread is used by Java. Extremely slow in VNC and SSH testing. RDP connection works to Windows 10 Pro on x64 but not ARM.
+
+Process to reproduce RDP issue
+
+Enable Remote Control on Windows 10 machine
+
+Guacamole Connection
+
+PARAMETERS:Authentication:Security mode:Any
+
+PARAMETERS:Authentication:Ignore server certificate:Checked
+
+With right hostname,port(3389),username and password
+
+Optionally set resultion to 800 x 600
