@@ -1,6 +1,6 @@
 # Release Notes
 
-Forked archived repository in a non-buildable state and 
+Forked archived repository in a non-buildable state and restored it to working state
 
 ## Phase 1 - Working Builds
 
@@ -11,3 +11,5 @@ Used crude and rudimentary workarounds where required.
 ## Phase 2 - Branch and DEV builds
 
 Improve using series of update branches. Commit test builds as doritoes/guacamole:dev.
+
+Noted initial run of the container on Raspberry Pi 3 takes a very long time as only one thread is used by Java
