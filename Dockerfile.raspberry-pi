@@ -21,10 +21,10 @@ RUN curl -SLO "https://github.com/just-containers/s6-overlay/releases/download/v
 WORKDIR ${GUACAMOLE_HOME}
 
 # Install dependencies
-# installing missing publics key to stop the build from breaking
+# installing missing public keys to stop the build from breaking
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9
 RUN apt-get update && apt-get install -y \
-    libtool-bin build-essentials ghostscript
+    apt-utils build-essentials ghostscript libtool-bin 
 RUN apt-get uinstall -y \
     libcairo2-dev libjpeg62-turbo-dev libpng-dev \
     libossp-uuid-dev libavcodec-dev libavformat-dev \
@@ -32,8 +32,7 @@ RUN apt-get uinstall -y \
     freerdp2-dev libfreerdp-client2-2 \
     libssh2-1-dev libtelnet-dev libvncserver-dev \
     libwebsockets-dev libpulse-dev libssl-dev libvorbis-dev \
-    libwebp-dev postgresql-${PG_MAJOR} \
-  && rm -rf /var/lib/apt/lists/*
+    libwebp-dev postgresql-${PG_MAJOR}
 
 # Install guacamole-server
 # adding -k insecure pull to fix a broken build
