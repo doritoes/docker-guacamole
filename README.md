@@ -15,12 +15,14 @@ This container runs the guacamole web client, the guacd server and a postgres da
 ## Status
 
 **:warning: This project is a fork of oznu/docker-guacamole, which is archived and no longer supported**
+
 **Main Build**
 * build now passes and initial testing looks good
 * postgresql 13
 * VNC, RDP, and ssh have been tested (only)
 * built-in authentication has been tested (only)
 * tested Windows 10 and Ubuntu 20.04
+
 **ARM Build**
 * build is in a "hack-me-up" state to get it to pass
 * postgresql 9.6
