@@ -1,23 +1,37 @@
 # Docker Guacamole
 
+**Disclaimer:** This work is based on the work of: https://github.com/oznu/docker-guacamole and heavily influenced by other forks
+
 A Docker Container for [Apache Guacamole](https://guacamole.apache.org/), a client-less remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH over HTML5.
 
-This image will run on most platforms that support Docker including Docker for Mac, Docker for Windows, Synology DSM and Raspberry Pi 3 boards.
-
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/esgaHNRxdhY/0.jpg)](http://www.youtube.com/watch?v=esgaHNRxdhY "Video Title")
+This image will run on most platforms that support Docker. Goal is to test and confirm the following:
+* Docker for Windows, Linux, Mac
+* Synology DSM
+* Raspberry Pi 3
+* Raspberry Pi4 ARM64v8 on an 64bit OS
 
 This container runs the guacamole web client, the guacd server and a postgres database.
 
 ## Status
 
 **:warning: This project is a fork of oznu/docker-guacamole, which is archived and no longer supported**
-* The main build now passes and initial testing looks good; postgressql 13; tested Windows 10 and Ubuntu 20.04
-* The ARM build is in a "hack-me-up" state to get it passing; ; postgresql 9.6; it is very slow to star for the first time a Raspberry Pi 3 on Raspberry Pi OS
+**Main Build**
+* build now passes and initial testing looks good
+* postgresql 13
 * VNC, RDP, and ssh have been tested (only)
-* Built-in authentication have been tested (only)
-* My test environments do not include LDAP or other authentication services at this time
+* built-in authentication has been tested (only)
+* tested Windows 10 and Ubuntu 20.04
+**ARM Build**
+* build is in a "hack-me-up" state to get it to pass
+* postgresql 9.6
+* VNC and SSH have been tested
+* RDP is not working currently
+* built-in authentication has been tested (only)
+* very slow to start for the first time a Raspberry Pi 3 on Raspberry Pi OS due to JAVA only using one thread
 
 ## Usage
+
+### x86_64
 
 ```shell
 docker run \
@@ -26,9 +40,11 @@ docker run \
   doritoes/guacamole
 ```
 
-## Raspberry Pi / ARMv6
+### Raspberry Pi / ARMv6
 
 This image will also allow you to run [Apache Guacamole](https://guacamole.apache.org/) on a Raspberry Pi or other Docker-enabled ARMv5/6/7/8 devices by using the `armhf` tag.
+
+Tested on Raspberry Pi 3B
 
 ```shell
 docker run \
@@ -36,6 +52,10 @@ docker run \
   -v </path/to/config>:/config \
   doritoes/guacamole:armhf
 ```
+
+### Raspberry Pi / ARM64v8
+
+This work is in progress
 
 ## Parameters
 
@@ -95,8 +115,6 @@ volumes:
 ```
 
 ## License
-
-Copyright (C) 2017-2020 oznu, (C) 2021 doritoes derivative work
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
