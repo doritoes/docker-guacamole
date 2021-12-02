@@ -24,7 +24,7 @@ WORKDIR ${GUACAMOLE_HOME}
 # installing missing public keys to stop the build from breaking
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9
 RUN apt-get update && apt-get install -y \
-    apt-utils build-essentials ghostscript libtool-bin 
+    apt-utils build-essential ghostscript libtool-bin 
 RUN apt-get uinstall -y \
     libcairo2-dev libjpeg62-turbo-dev libpng-dev \
     libossp-uuid-dev libavcodec-dev libavformat-dev \
