@@ -1,4 +1,5 @@
 FROM library/tomcat:9-jre11
+#FROM tomcat:jdk15-openjdk-slim-buster #candidate
 
 ENV ARCH=amd64 \
   GUAC_VER=1.3.0 \
@@ -21,18 +22,17 @@ WORKDIR ${GUACAMOLE_HOME}
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
+    apt-utils ghostscript build-essential libtool
+RUN apt-get install -y \
     libcairo2-dev libjpeg62-turbo-dev libpng-dev \
     libossp-uuid-dev libavcodec-dev libavutil-dev \
     libswscale-dev freerdp2-dev libfreerdp-client2-2 libpango1.0-dev \
     libssh2-1-dev libtelnet-dev libvncserver-dev \
     libpulse-dev libssl-dev libvorbis-dev libwebp-dev libwebsockets-dev \
-    ghostscript postgresql-${PG_MAJOR} \
-    build-essential
+    postgresql-${PG_MAJOR}
 
-# Link FreeRDP to where guac expects it to be
-# the target doesn't exist and the arm folder for the link doesn't exist
-#RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp /usr/lib/arm-linux-gnueabihf/freerdp || exit 0
-#RUN [ "$ARCH" = "amd64" ] && ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
+# the target doesn't exist
+#ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
 
 # Install guacamole-server
 RUN curl -SLO "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/source/guacamole-server-${GUAC_VER}.tar.gz" \
@@ -69,7 +69,7 @@ RUN set -xe \
 
 # Cleanup
 RUN apt-get remove --purge -y build-essential
-RUN apt-get autoremove -y && apt-get clean && apt-get autoclean \
+RUN apt-get autoremove -y && apt-get clean autoclean \
   && rm -rf /var/lib/apt/lists/*
 
 # Wrap up
@@ -77,6 +77,9 @@ ENV PATH=/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH
 ENV GUACAMOLE_HOME=/config/guacamole
 
 WORKDIR /config
+
 COPY root /
+
 EXPOSE 8080
+
 ENTRYPOINT [ "/init" ]
