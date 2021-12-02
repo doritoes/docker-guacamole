@@ -70,7 +70,7 @@ RUN set -xe \
 
 # Cleanup
 RUN apt-get remove --purge -y build-essential \
-  && apt-get autoremove -y && apt-clean autoclean \
+  && apt-get autoremove -y && apt-get clean autoclean \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /usr/share/man/*
 
