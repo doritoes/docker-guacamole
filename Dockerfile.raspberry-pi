@@ -24,8 +24,8 @@ WORKDIR ${GUACAMOLE_HOME}
 # installing missing publics key to stop the build from breaking
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9
 RUN apt-get update && apt-get install -y \
-    libcairo2-dev libjpeg62-turbo-dev \
-    libtool-bin libpng12-dev \
+    libcairo2-dev libjpeg62-turbo-dev libpng-dev \
+    libtool-bin \
     libossp-uuid-dev libavcodec-dev libavutil-dev \
     libswscale-dev freerdp2-dev libfreerdp-client2-2 libpango1.0-dev \
     libssh2-1-dev libtelnet-dev libvncserver-dev \
