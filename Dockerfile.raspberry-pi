@@ -69,9 +69,10 @@ RUN set -xe \
   ;done
 
 # Cleanup
-RUN apt-get remove --purge -y build-essential
-RUN apt-get autoremove -y && apt-clean autoclean \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt-get remove --purge -y build-essential \
+  && apt-get autoremove -y && apt-clean autoclean \
+  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /usr/share/man/*
 
 ENV PATH=/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH
 ENV GUACAMOLE_HOME=/config/guacamole
