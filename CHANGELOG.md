@@ -13,5 +13,5 @@
 - [ ] Rebuild all images and clean up the :dev images
 - [ ] Milestone release
 
-## Phase 3 - Suppport
+## Phase 3 - Support
 Goal 1/1/2022
