@@ -16,24 +16,30 @@ This container runs the guacamole web client, the guacd server and a postgres da
 
 **:warning: This project is a fork of oznu/docker-guacamole, which is archived and no longer supported**
 
-**Main Build**
-* build now passes and initial testing looks good
+**Latest**
+* x64 build now passes and initial testing looks good
 * postgresql 13
 * VNC, RDP, and ssh have been tested (only)
 * built-in authentication has been tested (only)
 * tested Windows 10 and Ubuntu 20.04
 
-**ARM Build**
+**armhf**
+* 32-bit Raspbian OS support, should work on Pi 2
 * build is in a "hack-me-up" state to get it to pass
 * postgresql 9.6
 * VNC and SSH have been tested
-* RDP is not working currently
+* RDP is not working currently; the dockerhub image oznu/armhf has working RDP; cloned at doritoes/guacamole:armhflegacy
 * built-in authentication has been tested (only)
-* very slow to start for the first time a Raspberry Pi 3 on Raspberry Pi OS due to JAVA only using one thread
+* tested on 32-bit OS on Pi 3B
+
+**arm64**
+Coming soon
+* 64-bit Raspberry Pi OS support, should work on Pi 2B and later
+* will be testing on Pi 4B
 
 ## Usage
 
-### x86_64
+### x86_64 / x64
 
 ```shell
 docker run \
@@ -42,12 +48,15 @@ docker run \
   doritoes/guacamole
 ```
 
-### Raspberry Pi / ARMv6
+### Raspberry Pi
+
+#### armhf / ARMv5 ARMv7 ARMv7
 
 This image will also allow you to run [Apache Guacamole](https://guacamole.apache.org/) on a Raspberry Pi or other Docker-enabled ARMv5/6/7/8 devices by using the `armhf` tag.
 
 Tested on Raspberry Pi 3B
 
+Rebuilt but RDP not working due to upstream bug in freerdp
 ```shell
 docker run \
   -p 8080:8080 \
@@ -55,9 +64,24 @@ docker run \
   doritoes/guacamole:armhf
 ```
 
-### Raspberry Pi / ARM64v8
+Legacy image from oznu/guacamole with working RDP
+```shell
+docker run \
+  -p 8080:8080 \
+  -v </path/to/config>:/config \
+  doritoes/guacamole:armhflegacy
+```
+
+#### ARM64v8
 
 This work is in progress
+
+```shell
+docker run \
+  -p 8080:8080 \
+  -v </path/to/config>:/config \
+  doritoes/guacamole:arm64v8
+```
 
 ## Parameters
 
