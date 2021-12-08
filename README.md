@@ -33,9 +33,10 @@ This container runs the guacamole web client, the guacd server and a postgres da
 * tested on 32-bit OS on Pi 3B
 
 **arm64**
-Coming soon
 * 64-bit Raspberry Pi OS support, should work on Pi 2B and later
 * will be testing on Pi 4B
+* postgresql 11
+* testing in progress
 
 ## Usage
 
