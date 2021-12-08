@@ -1,70 +1,17 @@
 # Release Notes
 
-Forked archived repository in a non-buildable state and restored it to working state
-
 ## Phase 1 - Working Builds
+- [x] Forked archived repository in a non-buildable state and restored it to working state; Used crude and rudimentary workarounds where required.
+- [x] Working x64 adn armf builds, basic testing
 
-Got working builds for x64 and ARM and did basic testing. Updated to latest s6. On x64 builds update to postgresql 13.
+## Phase 2 - Branch for development
+- [x] Improve using series of update branches. Commit test builds as doritoes/guacamole:dev
+- [x] Noted initial run of the container on Raspberry Pi 3 takes a very long time and VNC/SSH is extermely slow as only one thread is used by Java; switching from v5 to v7 base image resolves this
+- [x] RDP connection works to Windows 10 Pro on x64 but not armhv; tracked this to exception in libguac-client-rdp, works in oznu/guacamole:armf image
+- [x] Created arm64v8 dockerfile and tested on Pi 4B; RDP works
+- [ ] Test on Raspberry Pi 3B with 64-bit OS
+- [ ] Rebuild all images and clean up the :dev images
+- [ ] Milestone release
 
-Used crude and rudimentary workarounds where required.
-
-## Phase 2 - Branch and DEV builds
-
-Improve using series of update branches. Commit test builds as doritoes/guacamole:dev.
-
-Noted initial run of the container on Raspberry Pi 3 takes a very long time as only one thread is used by Java. Extremely slow in VNC and SSH testing. RDP connection works to Windows 10 Pro on x64 but not ARM.
-
-Process to reproduce RDP issue
-
-Enable Remote Control on Windows 10 machine
-
-Guacamole Connection
-
-PARAMETERS:Authentication:Security mode:Any
-
-PARAMETERS:Authentication:Ignore server certificate:Checked
-
-With right hostname,port(3389),username and password
-
-Optionally set resultion to 800 x 600
-
-Black screen paints, but disconnects
-
-Testing
-
-Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp
-
-change REG_DWORD SecurityLayer from 2 to 1
-
-also try 0
-
-also try installing freerpd from source
-
-sudo apt-get update -y
-
-sudo apt-get install git cmake cdbs zlib1g-dev libssl-dev libglib2.0-dev libxml2-dev libxext-dev libsystemd-dev libwayland-dev libxkbcommon-dev libasound2-dev libpulse-dev libcups2-dev libpcsclite-dev libavcodec-dev libavutil-dev libavresample-dev libswresample-dev libxkbfile-dev libxinerama-dev libxcursor-dev libxv-dev libxi-dev libxrandr-dev docbook-xsl libcairo2-dev xsltproc libusb-1.0-0-dev -y
-
-sudo git clone git://github.com/FreeRDP/FreeRDP.git --branch 2.2.0
-
-cd FreeRDP
-
-sudo cmake -DTARGET_ARCH=ARM -DWITH_X11=ON
-
-sudo make
-
-sudo make install
-
-It installs to /usr/local/bin/xfreerdp, so it will probably overwrite 2.0.0 if you already have it installed.
-
-If you leave out "--branch 2.2.0", you'll get 3.0.0-dev as of this post.
-
-2.4.1 is the maintenance release with security fix
-
-Also concnered about:
-RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp /usr/include/freerdp2/freerdp || exit 0
-RUN [ "$ARCH" = "amd64" ] && ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
-vs
-RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp /usr/lib/arm-linux-gnueabihf/freerdp || exit 0
-RUN [ "$ARCH" = "amd64" ] && ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
-
-arm-linux-gnueabihf does not exist, but arm-linux-gnueabi does.
+## Phase 3 - Suppport
+Goal 1/1/2022
