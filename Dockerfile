@@ -1,13 +1,16 @@
-FROM library/tomcat:9-jre11
-#FROM tomcat:jdk15-openjdk-slim-buster #candidate
+FROM tomcat:jdk15-openjdk-slim-buster
 
 ENV ARCH=amd64 \
   GUAC_VER=1.3.0 \
   GUACAMOLE_HOME=/app/guacamole \
-  PG_MAJOR=13 \
+  PG_MAJOR=11 \
   PGDATA=/config/postgres \
   POSTGRES_USER=guacamole \
   POSTGRES_DB=guacamole_db
+
+# Install essential packages
+RUN apt-get update && apt-get install -y \
+    apt-utils ghostscript build-essential curl libtool
 
 # Apply the s6-overlay
 RUN curl -SLO "https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.3/s6-overlay-${ARCH}.tar.gz" \
@@ -21,18 +24,14 @@ RUN curl -SLO "https://github.com/just-containers/s6-overlay/releases/download/v
 WORKDIR ${GUACAMOLE_HOME}
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
-    apt-utils ghostscript build-essential libtool
 RUN apt-get install -y \
     libcairo2-dev libjpeg62-turbo-dev libpng-dev \
     libossp-uuid-dev libavcodec-dev libavutil-dev \
-    libswscale-dev freerdp2-dev libfreerdp-client2-2 libpango1.0-dev \
-    libssh2-1-dev libtelnet-dev libvncserver-dev \
-    libpulse-dev libssl-dev libvorbis-dev libwebp-dev libwebsockets-dev \
+    libswscale-dev freerdp2-dev libfreerdp-client2-2 \
+    libpango1.0-dev libssh2-1-dev libtelnet-dev \
+    libvncserver-dev libpulse-dev libssl-dev \
+    libvorbis-dev libwebp-dev libwebsockets-dev \
     postgresql-${PG_MAJOR}
-
-# the target doesn't exist
-#ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
 
 # Install guacamole-server
 RUN curl -SLO "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/source/guacamole-server-${GUAC_VER}.tar.gz" \

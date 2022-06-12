@@ -33,12 +33,11 @@ This container runs the guacamole web client, the guacd server and a postgres da
 * tested on 32-bit OS on Pi 3B
 
 **arm64**
-* 64-bit Raspberry Pi OS support, should work on Pi 2B and later
-* will be testing on Pi 4B
+* 64-bit Raspberry Pi OS support, should work on Pi 2B rev 1.2 and later (a22042	Q3 2016	2 Model B with BCM2837)
 * postgresql 11
 * VNC, RDP, and ssh have been tested (only)
 * built-in authentication has been tested (only)
-* tested on 64-bit Raspberry Pi OS on Pi 4B
+* tested on 64-bit Raspberry Pi OS on Pi 4B and Pi 3B
 
 ## Usage
 
@@ -78,6 +77,8 @@ docker run \
 #### ARM64v8
 
 This image will also allow you to run [Apache Guacamole](https://guacamole.apache.org/) on a Raspberry Pi 2B or later, or other Docker-enabled ARMv5/6/7/8 devices by using the `arm64v8` tag.
+
+Tested on Raspberry Pi 3B and 4B
 
 ```shell
 docker run \
