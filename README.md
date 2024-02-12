@@ -12,6 +12,8 @@ This image will run on most platforms that support Docker. Goal is to test and c
 
 This container runs the guacamole web client, the guacd server and a postgres database.
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/doritoes/guacamole.svg)](https://hub.docker.com/r/doritoes/guacamole/)
+
 ## Status
 
 **:warning: This project is a fork of oznu/docker-guacamole, which is archived and no longer supported**
